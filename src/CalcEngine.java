@@ -19,23 +19,10 @@ public class CalcEngine
         displayValue=0;
 		operand1 = 0;
     }
-
-    /**
-     * Return the value that should currently be displayed on the calculator
-     * display.
-     */
-    public int getDisplayValue()
-    {
-        return(displayValue);
-    }
-
-    /**
-     * A number button was pressed. Do whatever you have to do to handle it.
-     * The number value of the button is given as a parameter.
-     */
-    public void numberPressed(int number)
-    {
-        displayValue = displayValue *10 + number;
+  
+    public String infixToPostfix(String s){
+		return s;
+    	
     }
 
     /**
@@ -111,7 +98,7 @@ public void divide()
      */
     public String getTitle()
     {
-        return("My Calculator");
+        return("Not So Scientific Calculator");
     }
 
     /**
@@ -120,7 +107,7 @@ public void divide()
      */
     public String getAuthor()
     {
-        return("Joe Daly");
+        return("Ciaran Roche");
     }
 
     /**

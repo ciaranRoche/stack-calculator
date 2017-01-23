@@ -16,6 +16,7 @@ public class UserInterface
 {
 	private CalcEngine calc;
 	private boolean showingAuthor;
+	private String infix;
 
     private JFrame frame;
 	private JTextField display;
@@ -27,6 +28,7 @@ public class UserInterface
 	public UserInterface(CalcEngine engine)
 	{
 		calc = engine;
+		infix = "";
 		showingAuthor = true;
 		makeFrame();
 		frame.setVisible(true);
@@ -55,22 +57,26 @@ public class UserInterface
 		display = new JTextField();
 		contentPane.add(display, BorderLayout.NORTH);
 
-		JPanel buttonPanel = new JPanel(new GridLayout(4, 4));
+		JPanel buttonPanel = new JPanel(new GridLayout(5, 4));
+			addButton(buttonPanel, "C");
+			addButton(buttonPanel, "(");
+			addButton(buttonPanel, ")");
+			addButton(buttonPanel, "/");
 			addButton(buttonPanel, "7");
 			addButton(buttonPanel, "8");
 			addButton(buttonPanel, "9");
-			addButton(buttonPanel, "C");
+			addButton(buttonPanel, "*");
 			addButton(buttonPanel, "4");
 			addButton(buttonPanel, "5");
 			addButton(buttonPanel, "6");
-			addButton(buttonPanel, "*");
+			addButton(buttonPanel, "+");
 			addButton(buttonPanel, "1");
 			addButton(buttonPanel, "2");
 			addButton(buttonPanel, "3");
-			addButton(buttonPanel, "/");
-			addButton(buttonPanel, "0");
-			addButton(buttonPanel, "+");
 			addButton(buttonPanel, "-");
+			addButton(buttonPanel, "0");
+			addButton(buttonPanel, ".");
+			addButton(buttonPanel, "^");
 			addButton(buttonPanel, "=");
 		contentPane.add(buttonPanel, BorderLayout.CENTER);
 
@@ -107,23 +113,32 @@ public class UserInterface
 		   command.equals("6") ||
 		   command.equals("7") ||
 		   command.equals("8") ||
-		   command.equals("9"))
+		   command.equals("9") ||
+		   command.equals("^") ||
+		   command.equals("(") ||
+		   command.equals(")") ||
+		   command.equals("."))
 		{
-			int number = Integer.parseInt(command);
-			calc.numberPressed(number);
+			infix = infix.concat(command);
 		}
 		else if(command.equals("+"))
-			calc.plus();
+			//calc.plus();
+			infix = infix.concat(command);
 		else if(command.equals("-"))
-			calc.minus();
+			//calc.minus();
+			infix = infix.concat(command);
 		else if(command.equals("="))
-			calc.equals();
+			//calc.equals();
+			infix = calc.infixToPostfix(command);
 		else if(command.equals("C"))
-			calc.clear();
+			infix = "";
+			//infix = infix.concat(command);
 		else if(command.equals("*"))
-			calc.multiply();
+			//calc.multiply();
+			infix = infix.concat(command);
 		else if(command.equals("/"))
-			calc.divide();
+			//calc.divide();
+			infix = infix.concat(command);
 
 		redisplay();
 	}
@@ -134,7 +149,9 @@ public class UserInterface
 	 */
 	private void redisplay()
 	{
-		display.setText("" + calc.getDisplayValue());
+		display.setText(infix);
+		//calc.getDisplayValue();
+		//display.setText("" + calc.getDisplayValue());
 	}
 
 	/**
