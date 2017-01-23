@@ -5,6 +5,8 @@
  * 
  * @author Michael Kolling
  * @version 31 July 2000
+ * @editedBy Ciaran Roche
+ * @date 23/01/2017
  */
 public class Calculator
 {

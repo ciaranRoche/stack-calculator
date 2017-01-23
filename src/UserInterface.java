@@ -8,8 +8,10 @@ import javax.swing.border.*;
  * done here. This class is responsible just for putting up the display on 
  * screen. It then refers to the "CalcEngine" to do all the real work.
  * 
- * @author Michael Kolling
+ * @author Michael Kolling 
  * @version 31 July 2000
+ * @editedBy Ciaran Roche
+ * @date 23/01/2017
  */
 public class UserInterface
 	implements ActionListener
@@ -122,22 +124,16 @@ public class UserInterface
 			infix = infix.concat(command);
 		}
 		else if(command.equals("+"))
-			//calc.plus();
 			infix = infix.concat(command);
 		else if(command.equals("-"))
-			//calc.minus();
 			infix = infix.concat(command);
 		else if(command.equals("="))
-			//calc.equals();
-			infix = calc.infixToPostfix(command);
+			calc.infixToPostfix(infix);
 		else if(command.equals("C"))
 			infix = "";
-			//infix = infix.concat(command);
 		else if(command.equals("*"))
-			//calc.multiply();
 			infix = infix.concat(command);
 		else if(command.equals("/"))
-			//calc.divide();
 			infix = infix.concat(command);
 
 		redisplay();
@@ -150,8 +146,6 @@ public class UserInterface
 	private void redisplay()
 	{
 		display.setText(infix);
-		//calc.getDisplayValue();
-		//display.setText("" + calc.getDisplayValue());
 	}
 
 	/**
