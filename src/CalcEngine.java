@@ -10,9 +10,8 @@ import java.util.Stack;
  */
 public class CalcEngine
 {
-    public String output= "";
-    
-
+    public String output; 
+    public Stack<Integer> memory;
     public Stack<Character>stack;
     /**
      * Create a CalcEngine instance. Initialise its state so that it is ready 
@@ -21,6 +20,43 @@ public class CalcEngine
     public CalcEngine()
     {
     	stack = new Stack<Character>();
+    	memory = new Stack<Integer>();
+    	output = "";
+    }
+    
+    public double calculate(String output){
+    	memory.clear();
+    	for(int n=0; n<output.length(); n++){
+    		int ch = output.charAt(n);
+    		if('0'<=ch&& ch<='9')
+    			memory.push(ch-'0');
+    		else{
+    			switch(ch){
+    			case '+':
+    				int ba = memory.pop();
+    				int aa = memory.pop();
+    				memory.push(aa+ba);
+    				break;
+    			case '-':
+    				int bm = memory.pop();
+    				int am = memory.pop();
+    				memory.push(am-bm);
+    				break;
+    			case '*':
+    				int bmu = memory.pop();
+    				int amu = memory.pop();
+    				memory.push(amu*bmu);
+    				break;
+    			case '/':
+    				int bd = memory.pop();
+    				int ad = memory.pop();
+    				memory.push(ad/bd);
+    				break;
+    			}
+    		}
+    	}
+    	System.out.println(memory.pop());
+    	return memory.pop();
     }
   
     public String infixToPostfix(String s){
@@ -50,8 +86,13 @@ public class CalcEngine
 			output = output + stack.pop();
 		}
 		System.out.println(output);
+		calculate(output);
     	return output;
     	
+    }
+    
+    public String getOutput(){
+    	return output;
     }
     
     public void operand(char opThis, int prec1){

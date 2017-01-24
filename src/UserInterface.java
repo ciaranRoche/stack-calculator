@@ -130,7 +130,7 @@ public class UserInterface
 		else if(command.equals("="))
 			calc.infixToPostfix(infix);
 		else if(command.equals("C"))
-			infix = " ";
+			infix = "";
 			calc.clear();
 		redisplay();
 	}
