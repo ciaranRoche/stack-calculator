@@ -10,8 +10,7 @@ import java.util.Stack;
  */
 public class CalcEngine
 {
-    char operator;
-    int displayValue, operand1;
+    public String output= "";
     
 
     public Stack<Character>stack;
@@ -40,7 +39,7 @@ public class CalcEngine
 				stack.push(ch);
 				break;
 			case ')':
-				parentise(ch);
+				priority(ch);
 				break;
 				default:
 					output = output + ch;
@@ -54,8 +53,6 @@ public class CalcEngine
     	return output;
     	
     }
-    
-    public String output= "";
     
     public void operand(char opThis, int prec1){
     	while(!stack.isEmpty()){
@@ -78,7 +75,7 @@ public class CalcEngine
     	stack.push(opThis);
     }
     
-    public void parentise(char ch){
+    public void priority(char ch){
     	while(!stack.isEmpty()){
     		char cha = stack.pop();
     		if (cha == '(')
@@ -86,73 +83,9 @@ public class CalcEngine
     		else output = output + cha;
     	}
     }
-
-    /**
-     * The 'plus' button was pressed. 
-     */
-    public void plus()
-    {
-       operand1 = displayValue;
-	   displayValue = 0;
-       operator = '+';
-    }
     
-    /**
-     * The 'minus' button was pressed.
-     */
-    public void minus()
-    {
-        operand1 = displayValue;
-	   displayValue = 0;
-       operator = '-'; 
-    }
-
-public void multiply()
-    {
-        operand1 = displayValue;
-	   displayValue = 0;
-       operator = '*'; 
-    }
-
-public void divide()
-    {
-        operand1 = displayValue;
-	   displayValue = 0;
-       operator = '/'; 
-    }
-
-    /**
-     * The '=' button was pressed.
-     */
-    public void equals()
-    {
-        if (operator == '+') {
-			displayValue += operand1;
-			operand1 = 0;
-		}
-	    else if (operator == '-') {
-			displayValue = operand1-displayValue;
-			operand1 = 0;
-		}
-		else if (operator == '*') {
-			displayValue = operand1*displayValue;
-			operand1 = 0;
-		}
-		else if (operator == '/') {
-			displayValue = operand1/displayValue;
-			operand1 = 0;
-		}
-
-    }
-
-    /**
-     * The 'C' (clear) button was pressed.
-     */
-    public void clear()
-    {
-        displayValue = 0;
-		operand1 = 0;
-
+    public void clear(){
+    	output = "";
     }
 
     /**

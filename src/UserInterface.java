@@ -119,23 +119,19 @@ public class UserInterface
 		   command.equals("^") ||
 		   command.equals("(") ||
 		   command.equals(")") ||
-		   command.equals("."))
+		   command.equals(".") ||
+		   command.equals("+") ||
+		   command.equals("-") ||
+		   command.equals("*") ||
+		   command.equals("/"))
 		{
 			infix = infix.concat(command);
 		}
-		else if(command.equals("+"))
-			infix = infix.concat(command);
-		else if(command.equals("-"))
-			infix = infix.concat(command);
 		else if(command.equals("="))
 			calc.infixToPostfix(infix);
 		else if(command.equals("C"))
-			infix = "";
-		else if(command.equals("*"))
-			infix = infix.concat(command);
-		else if(command.equals("/"))
-			infix = infix.concat(command);
-
+			infix = " ";
+			calc.clear();
 		redisplay();
 	}
 
